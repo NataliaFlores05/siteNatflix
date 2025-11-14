@@ -1,0 +1,125 @@
+body{
+    padding: 0;
+    bottom: 0;
+    margin: 0;
+    background-color: rgb(52, 53, 57);
+}
+h1{
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    color: rgb(255, 255, 255); 
+    font-size: 35px;   
+}
+h2{
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    color: rgb(201, 204, 255);
+}
+h4{
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    color: rgb(255, 255, 255);
+}
+header{
+    position: sticky;
+    display: flex;
+    justify-content: space-around;
+    align-items:center ;
+    padding:10px;
+    background-color: rgb(51, 49, 95);
+    margin: 0px;
+    box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+}
+#img1{
+    margin-left: auto;
+    margin-right: 30px;
+}
+.container {
+    display: flex;
+    align-items: flex; 
+    margin-top: 60px;
+    margin-left: 10px;
+}
+
+
+.sidebar {
+    position: relative;
+    left: -85px;
+    width: 170px;
+    height: 700px;
+    background-color: rgb(120, 120, 130);
+    padding: 20px;
+    box-sizing: border-box; 
+    transition: left 0.3s ease;
+    font-size: 20px;
+    color: black;
+    overflow: hidden; 
+    border-radius: 2px;
+}
+
+.sidebar:hover {
+    left: -20px; 
+}
+
+.sidebar a {
+    margin: 8px 0; 
+    display: block;
+    text-decoration: none;
+    color: black;
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+}
+table {
+    margin-top:0;              
+    padding: 0;   
+    border-spacing: 0;               
+    vertical-align: top;     
+}
+.produto {
+    position: relative;  
+    display: flex;
+    align-items: center;
+}
+  
+  
+.info-oculta {
+    position: absolute;
+    top: 100%;          
+    width: 170px;
+    height: 0;          
+    overflow: hidden;   
+    background-color: rgb(88, 87, 115);
+    color: rgb(255, 255, 255);
+    padding: 0 10px;   
+    box-sizing: border-box;
+    font-size: 14px;
+    transition: height 0.3s ease;
+    border-radius: 0 0 5px 5px;
+}
+  
+.produto:hover .info-oculta {
+    height: 120px;       
+}
+footer{
+    bottom: 0;
+    
+    background-color: rgb(185, 216, 255);
+    width: 100%;
+    height: 30px;
+    margin: 0 auto;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    color: rgb(0, 0, 0);
+}
+#a1{
+    text-decoration: none;
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+}
+img{
+    border-radius: 2px;
+}
+ul,li,p{
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+}

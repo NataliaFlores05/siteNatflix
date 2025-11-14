@@ -1,0 +1,69 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+  
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(180deg, #28303c, #062a44);
+    color: #bcd4ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+  
+.container {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(3, 8, 20, 0.6);
+    padding: 30px;
+    max-width: 800px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+  
+.poster-card {
+    flex: 1 1 250px;
+    text-align: center;
+    background: #0b2440;
+    border-radius: 14px;
+    padding: 14px;
+}
+  
+.poster-card img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 8px 20px rgba(2, 8, 25, 0.5);
+}
+  
+.poster-card h1 {
+    color: #ffffff;
+    font-size: 22px;
+    margin-bottom: 4px;
+}
+  
+.poster-card .ano {
+    color: #bcd4ff;
+    font-size: 14px;
+}
+  
+.review {
+    flex: 2 1 400px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 14px;
+    padding: 20px;
+    
+    line-height: 1.6;
+}
+  
+.review h2 {
+    color: #ffffff;
+    margin-bottom: 12px;
+    font-size: 20px;
+}
+ 
