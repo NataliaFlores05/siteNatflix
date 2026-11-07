@@ -5,7 +5,7 @@ from urllib.parse import urlsplit, unquote
 import re
 import sys
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(sys.argv[1] if len(sys.argv) > 1 else "_site").resolve()
 FILES = {p.relative_to(ROOT).as_posix() for p in ROOT.rglob("*") if p.is_file() and ".git" not in p.parts}
 errors = []
 
@@ -29,21 +29,40 @@ class Page(HTMLParser):
         super().__init__()
         self.source = source
         self.title = False
+        self.in_title = False
+        self.title_text = ""
+        self.anchor_depth = 0
         self.charset = False
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
-        if tag == "title": self.title = True
-        if tag == "meta" and attrs.get("charset"): self.charset = True
+        if tag == "title":
+            self.title = True
+            self.in_title = True
+        if tag == "a":
+            if self.anchor_depth: errors.append(f"{self.source}: links a aninhados")
+            self.anchor_depth += 1
+        if tag == "meta" and "charset" in attrs:
+            if attrs["charset"].strip().lower() == "utf-8": self.charset = True
+            else: errors.append(f"{self.source}: charset deve ser UTF-8")
         for attr in ("href", "src"):
             if attr in attrs: check(self.source, attrs[attr])
+
+    def handle_endtag(self, tag):
+        if tag == "title": self.in_title = False
+        if tag == "a": self.anchor_depth = max(0, self.anchor_depth - 1)
+    def handle_data(self, data):
+        if self.in_title: self.title_text += data
 
 for name in ("index.html", "pagina2.html", "pagina3.html", "pagina4.html", "pagina5.html", "resenha.html", "resenha2.html", "sobre.html"):
     if name not in FILES: errors.append(f"Pagina obrigatoria ausente: {name}")
 for name in sorted(FILES):
     if name.endswith(".html"):
         parser = Page(name)
-        parser.feed((ROOT / name).read_text(encoding="utf-8"))
-        if not parser.title or not parser.charset: errors.append(f"{name}: falta title ou charset")
+        try:
+            parser.feed((ROOT / name).read_text(encoding="utf-8"))
+        except UnicodeDecodeError:
+            errors.append(f"{name}: arquivo nao pode ser decodificado como UTF-8")
+        if not parser.title or not parser.title_text.strip() or not parser.charset: errors.append(f"{name}: title vazio/ausente ou declaracao UTF-8 ausente")
     elif name.endswith(".css"):
         for match in re.finditer(r"url\(\s*['\"]?([^)'\"]+)", (ROOT / name).read_text(encoding="utf-8")):
             check(name, match.group(1).strip())
